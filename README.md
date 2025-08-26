@@ -73,5 +73,19 @@ Run the command in the terminal.
 streamlit run streamlit.py
 ```
 
+## Dataset
+
+The assistant is scoped to the Chinook dataset by default and is automatically downloaded via KaggleHub (no DB file committed).  
+
+### Swap datasets
+You can use other SQLite datasets by changing the KaggleHub slug in this line:
+```python
+import kagglehub
+path = kagglehub.dataset_download("ranasabrii/chinook")  # change slug here
+```
+
+
+
+
 
 

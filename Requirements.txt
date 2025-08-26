@@ -1,0 +1,10 @@
+streamlit
+openai
+faiss-cpu
+sentence-transformers
+numpy
+pandas
+rouge-score
+kagglehub
+threadpoolctl==3.5.0
+databricks-sdk

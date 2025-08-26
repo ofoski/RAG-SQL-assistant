@@ -1,79 +1,80 @@
-🗄️ RAG-SQL-Assistant
+## **RAG-SQL Assistant (Chinook)**
 
-A Retrieval-Augmented Generation (RAG) SQL Assistant built with Streamlit, FAISS, and OpenAI.
-It converts natural language questions into SQL queries using database schema information.
+A **Retrieval-Augmented Generation (RAG)** SQL assistant built with **Streamlit**, **FAISS**, and **OpenAI**.  
+It converts **natural-language questions** into **Spark SQL** using **schema-aware retrieval** over the **Chinook** dataset.
 
-This project demonstrates:
+---
 
-Vectorized schema retrieval with embeddings
+### **✅ Main Steps**
+- **Extract metadata:** read **tables** and **columns** from the Chinook SQLite database.  
+- **Vectorize schema:** create **SentenceTransformers embeddings** of per-table schema text.  
+- **Index with FAISS:** store embeddings in a **FAISS** index for fast **similarity search**.  
+- **RAG retrieval:** fetch the **top-K relevant tables** for each user question.  
+- **Generate SQL:** build a focused prompt and produce **Spark SQL** with **ChatGPT**.  
+- **Preview results:** optionally run the SQL against SQLite to **preview** in **Streamlit**.
 
-FAISS indexing for similarity search
+---
 
-SQL generation with ChatGPT
+## **Installation (Windows)**
 
-A simple, interactive Streamlit UI
-
-🚀 Features
-
-Extracts table & column metadata from the Chinook SQLite dataset
-
-Vectorizes schema text with SentenceTransformers embeddings
-
-Builds a FAISS index for fast retrieval
-
-Uses RAG (retrieved schema + user prompt) to generate SQL queries
-
-Interactive Streamlit app where you type a question → get SQL → preview results
-
-📂 Dataset
-
-By default, the app uses the Chinook SQLite dataset, automatically downloaded from KaggleHub:
-
-import kagglehub
-path = kagglehub.dataset_download("ranasabrii/chinook")
-
-
-You can replace this with any KaggleHub SQLite dataset for more complex testing by changing the dataset slug.
-
-⚙️ Setup (Windows)
-1. Clone the repository
+**1) Clone the repo**
+```powershell
 git clone https://github.com/<your-username>/RAG-SQL-assistant.git
 cd RAG-SQL-assistant
+2) Create and activate a virtual environment
 
-2. Create a virtual environment
+powershell
+Copy
+Edit
 python -m venv venv
 venv\Scripts\activate
+3) Install dependencies
 
-3. Install dependencies
+powershell
+Copy
+Edit
 pip install -r Requirements.txt
+Setting the OpenAI API Key (Windows)
+You can set the key in two ways:
 
-4. Set your OpenAI API Key
+Method 1 (recommended): .env file
 
-The app requires an OpenAI API key. You can set it in two ways:
+Create a file named .env in the project root.
 
-🔑 Method 1: Using a .env file (recommended)
+Add:
 
-In the project root, create a file named .env
-
-Add your API key inside it:
-
+ini
+Copy
+Edit
 OPENAI_API_KEY=sk-your-key-here
+The app automatically loads this file.
 
+Method 2: Command Prompt
 
-The app will automatically load this key when running
-
-🔑 Method 2: Using Command Prompt
-
-Set your API key directly in Windows:
-
+powershell
+Copy
+Edit
 setx OPENAI_API_KEY "sk-your-key-here"
+(Close and reopen your terminal after running setx.)
 
-▶️ Running the app
-
-Start the Streamlit application:
-
+Running the App
+powershell
+Copy
+Edit
 streamlit run streamlit.py
+Open http://localhost:8501 in your browser.
 
+Dataset
+This assistant is scoped to the Chinook dataset.
 
-Then open http://localhost:8501
- in your browser.
+The code downloads Chinook automatically via KaggleHub (no DB file committed).
+
+You can test other, more complex SQLite datasets by changing the KaggleHub slug—the same RAG + FAISS pipeline applies.
+
+Example (inside code):
+
+python
+Copy
+Edit
+import kagglehub
+path = kagglehub.dataset_download("ranasabrii/chinook")  # swap slug to test other datasets

@@ -1,36 +1,36 @@
-# RAG-SQL Assistant (Chinook)
+# 🎵 RAG-SQL Assistant (Chinook)
 
 A Retrieval-Augmented Generation (RAG) SQL assistant built with **Streamlit**, **FAISS**, and **OpenAI**.  
 It converts natural-language questions into **SQLite queries executed with pandas** using schema-aware retrieval over the Chinook dataset.
 
-----
+---
 
-## Goal
+## 🎯 Goal
 Convert natural-language questions into **SQL queries** and run them on SQLite tables using **pandas**.
 
-----
+---
 
-## Stack
+## ⚙️ Stack
 - **Streamlit** (UI)  
 - **SentenceTransformers** (embeddings)  
 - **FAISS** (vector search)  
 - **OpenAI** (SQL generation)  
 
-----
+---
 
-## Scope
+## 🌍 Scope
 - Works on the **Chinook SQLite dataset** by default  
 - Easily swappable to other **KaggleHub SQLite datasets**  
 
 ---
 
-## Main Steps
-- Extract metadata → read tables and columns from the Chinook SQLite database.  
-- Vectorize schema → create SentenceTransformers embeddings of per-table schema text.  
-- Index with FAISS → store embeddings in a FAISS index for fast similarity search.  
-- RAG retrieval → fetch the top-K relevant tables for each user question.  
-- Generate SQL → build a focused prompt and produce Spark SQL with ChatGPT.  
-- Preview results → optionally execute the SQL against SQLite and display in Streamlit.  
+## 🛠️ Main Steps
+- 📑 Extract metadata → read tables and columns from the Chinook SQLite database.  
+- 🔡 Vectorize schema → create SentenceTransformers embeddings of per-table schema text.  
+- ⚡ Index with FAISS → store embeddings in a FAISS index for fast similarity search.  
+- 🎯 RAG retrieval → fetch the top-K relevant tables for each user question.  
+- 🤖 Generate SQL → build a focused prompt and produce SQL with ChatGPT.  
+- 📊 Preview results → execute the SQL against SQLite and display in Streamlit.  
 
 ---
 

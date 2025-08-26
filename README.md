@@ -47,4 +47,31 @@ cd RAG-SQL-assistant
 python -m venv venv
 venv\Scripts\activate
 ```
+### 3) Install dependencies
+```powershell
+pip install -r Requirements.txt
+```
+
+## Setting the OpenAI API Key (Windows)
+You can set the key in two ways:
+### Method 1: .env file
+```powershell
+OPENAI_API_KEY=sk-your-key-here
+```
+Create a file named .env in the project root.
+Add your key as shown above.
+The app will automatically load this file.
+
+### Method 2: Command Prompt
+```powershell
+setx OPENAI_API_KEY "sk-your-key-here"
+```
+Run the command in the terminal.
+
+## Running the App
+```powershell
+streamlit run streamlit.py
+```
+
+
 

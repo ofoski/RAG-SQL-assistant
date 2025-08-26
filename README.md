@@ -37,9 +37,10 @@ Convert natural-language questions into **Spark SQL** using schema-aware retriev
 ## Installation (Windows)
 
 ### 1) Clone the repo
-```powershell
+'''powershell
 git clone https://github.com/<your-username>/RAG-SQL-assistant.git
 cd RAG-SQL-assistant
+'''
 
 ### 2) Create and activate a virtual environment
 ```powershell

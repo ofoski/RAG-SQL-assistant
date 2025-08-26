@@ -78,8 +78,7 @@ import kagglehub
 path = kagglehub.dataset_download("ranasabrii/chinook")  # change slug here
 ```
 
-
-
-
+## 🖼️ Screenshot
+<img width="2862" height="1032" alt="image" src="https://github.com/user-attachments/assets/040356b0-e697-4ed6-a6d4-c67a2c828a05" />
 
 

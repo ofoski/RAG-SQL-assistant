@@ -40,34 +40,14 @@ Convert natural-language questions into **Spark SQL** using schema-aware retriev
 ```powershell
 git clone https://github.com/<your-username>/RAG-SQL-assistant.git
 cd RAG-SQL-assistant
-
-### 2) Create and activate a virtual environment
-```powershell
+2) Create and activate a virtual environment
+powershell
+Copy
+Edit
 python -m venv venv
 venv\Scripts\activate
-
-### 3) Install dependencies
-```powershell
+3) Install dependencies
+powershell
+Copy
+Edit
 pip install -r Requirements.txt
-
-## Setting the OpenAI API Key (Windows)
-
-You can set the key in two ways:
-
-## Method 1 (recommended): .env file
-OPENAI_API_KEY=sk-your-key-here
-
-
-Create a file named .env in the project root.
-
-Add your key as shown above.
-
-The app will automatically load this file.
-
-## Method 2: Command Prompt
-setx OPENAI_API_KEY "sk-your-key-here"
-
-
-Run the command in PowerShell.
-
-Close and reopen your terminal after running setx.

@@ -1,12 +1,14 @@
+# RAG-SQL Assistant (Chinook)
+
 A Retrieval-Augmented Generation (RAG) SQL assistant built with **Streamlit**, **FAISS**, and **OpenAI**.  
 It converts natural-language questions into **SQLite queries executed with pandas** using schema-aware retrieval over the Chinook dataset.
 
----
+----
 
 ## Goal
 Convert natural-language questions into **SQL queries** and run them on SQLite tables using **pandas**.
 
----
+----
 
 ## Stack
 - **Streamlit** (UI)  
@@ -14,7 +16,7 @@ Convert natural-language questions into **SQL queries** and run them on SQLite t
 - **FAISS** (vector search)  
 - **OpenAI** (SQL generation)  
 
----
+----
 
 ## Scope
 - Works on the **Chinook SQLite dataset** by default  

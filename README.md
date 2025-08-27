@@ -32,7 +32,7 @@ Convert natural-language questions into **SQL queries** and run them on SQLite t
 
 ### 1) Clone the repo
 ```powershell
-git clone https://github.com/<your-username>/RAG-SQL-assistant.git
+git clone https://github.com/ofoski/RAG-SQL-assistant.git
 cd RAG-SQL-assistant
 ```
 

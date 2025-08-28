@@ -35,7 +35,7 @@ def rouge_scores():
                 time.sleep(wait_time)
         raise Exception("Max retries exceeded due to rate limits.")
     
-    for example in dataset[0:2]:
+    for example in dataset:
         prompt = example["prompt"]
         expected_sql = example["gold_sql"].lower()
         sql = safe_text_to_sql(prompt).lower()

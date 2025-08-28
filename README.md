@@ -43,7 +43,7 @@ venv\Scripts\activate
 ```
 ### 3) Install dependencies
 ```powershell
-pip install -r Requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Setting the OpenAI API Key (Windows)

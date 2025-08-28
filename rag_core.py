@@ -49,7 +49,7 @@ def build_context(question, k=3):
 
 # COMMAND ----------
 
-from openai import OpenAI
+from openai import OpenAI, RateLimitError
 import os
 
 def text_to_sql(question, k=3, model_name="gpt-4o-mini"):
@@ -83,7 +83,7 @@ if __name__ == "__main__":
         for attempt in range(max_retries):
             try:
                 return text_to_sql(prompt)
-            except openai.RateLimitError as e:
+            except RateLimitError as e:
                 print(f"Rate limit hit. Waiting {wait_time} seconds before retrying...")
                 time.sleep(wait_time)
         raise Exception("Max retries exceeded due to rate limits.")

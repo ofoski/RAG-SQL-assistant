@@ -73,35 +73,3 @@ def text_to_sql(question, k=3, model_name="gpt-4o-mini"):
 # COMMAND ----------
 
 
-from rouge_score import rouge_scorer
-if __name__ == "__main__":
-
-    scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
-    rouge_scores = []
-
-    def safe_text_to_sql(prompt, max_retries=5, wait_time=20):
-        for attempt in range(max_retries):
-            try:
-                return text_to_sql(prompt)
-            except RateLimitError as e:
-                print(f"Rate limit hit. Waiting {wait_time} seconds before retrying...")
-                time.sleep(wait_time)
-        raise Exception("Max retries exceeded due to rate limits.")
-
-    for query in dataset:
-        generated_sql = safe_text_to_sql(query["prompt"])
-        score = scorer.score(query["gold_sql"], generated_sql)
-        rouge_l = score['rougeL'].fmeasure
-        rouge_scores.append(rouge_l)
-        if __name__ == "__main__":
-            print(f"Q: {query['prompt']}")
-            print(f"Expected SQL:\n{query['gold_sql']}")
-            print(f"Generated SQL:\n{generated_sql}")
-            print(f"ROUGE-L: {rouge_l:.4f}")
-            print("-" * 50)
-
-    avg_rouge = sum(rouge_scores) / len(rouge_scores)
-    print(f"✅ Average ROUGE-L Score (Clean SQL): {avg_rouge:.4f}")
-
-# COMMAND ----------
-

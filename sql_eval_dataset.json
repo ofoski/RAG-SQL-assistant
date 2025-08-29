@@ -49,29 +49,30 @@
     "prompt": "Show the top 5 customers by total amount spent, including their country.",
     "gold_sql": "SELECT Customer.CustomerId, Customer.FirstName, Customer.LastName, Customer.Country, SUM(Invoice.Total) AS TotalSpent FROM Customer INNER JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId GROUP BY Customer.CustomerId, Customer.FirstName, Customer.LastName, Customer.Country ORDER BY TotalSpent DESC, Customer.LastName ASC, Customer.FirstName ASC LIMIT 5;"
   },
+[
   {
     "difficulty": "difficult",
     "prompt": "Which genres generated the most revenue? Return genre and total revenue, top 5.",
-    "gold_sql": "SELECT Genre.Name AS GenreName, SUM(InvoiceLine.UnitPrice * InvoiceLine.Quantity) AS Revenue FROM InvoiceLine INNER JOIN Track ON InvoiceLine.TrackId = Track.TrackId INNER JOIN Genre ON Track.GenreId = Genre.GenreId GROUP BY Genre.GenreId, Genre.Name ORDER BY Revenue DESC, GenreName ASC LIMIT 5;"
+    "gold_sql": "SELECT g.Name AS GenreName, SUM(il.UnitPrice * il.Quantity) AS Revenue FROM InvoiceLine il JOIN Track t ON il.TrackId = t.TrackId JOIN Genre g ON t.GenreId = g.GenreId GROUP BY g.GenreId, g.Name ORDER BY Revenue DESC, g.Name LIMIT 5;"
   },
   {
     "difficulty": "difficult",
     "prompt": "Monthly revenue by year and month. Return year, month number, and total revenue, ordered by year then month.",
-    "gold_sql": "SELECT CAST(STRFTIME('%Y', Invoice.InvoiceDate) AS INTEGER) AS Year, CAST(STRFTIME('%m', Invoice.InvoiceDate) AS INTEGER) AS Month, SUM(Invoice.Total) AS Revenue FROM Invoice GROUP BY Year, Month ORDER BY Year ASC, Month ASC;"
+    "gold_sql": "SELECT CAST(STRFTIME('%Y', i.InvoiceDate) AS INT) AS Year, CAST(STRFTIME('%m', i.InvoiceDate) AS INT) AS Month, SUM(i.Total) AS Revenue FROM Invoice i GROUP BY Year, Month ORDER BY Year, Month;"
   },
   {
     "difficulty": "difficult",
     "prompt": "Top 5 artists by number of tracks in the catalog.",
-    "gold_sql": "SELECT Artist.Name AS ArtistName, COUNT(Track.TrackId) AS TrackCount FROM Artist INNER JOIN Album ON Album.ArtistId = Artist.ArtistId INNER JOIN Track ON Track.AlbumId = Album.AlbumId GROUP BY Artist.ArtistId, Artist.Name ORDER BY TrackCount DESC, ArtistName ASC LIMIT 5;"
+    "gold_sql": "SELECT a.Name AS ArtistName, COUNT(t.TrackId) AS TrackCount FROM Artist a JOIN Album al ON al.ArtistId = a.ArtistId JOIN Track t ON t.AlbumId = al.AlbumId GROUP BY a.ArtistId, a.Name ORDER BY TrackCount DESC, a.Name LIMIT 5;"
   },
   {
     "difficulty": "difficult",
     "prompt": "Average track length in seconds per genre, top 5 longest on average.",
-    "gold_sql": "SELECT Genre.Name AS GenreName, AVG(Track.Milliseconds) / 1000.0 AS AvgSeconds FROM Track INNER JOIN Genre ON Track.GenreId = Genre.GenreId GROUP BY Genre.GenreId, Genre.Name ORDER BY AvgSeconds DESC, GenreName ASC LIMIT 5;"
+    "gold_sql": "SELECT g.Name AS GenreName, AVG(t.Milliseconds)/1000.0 AS AvgSeconds FROM Track t JOIN Genre g ON t.GenreId = g.GenreId GROUP BY g.GenreId, g.Name ORDER BY AvgSeconds DESC, g.Name LIMIT 5;"
   },
   {
     "difficulty": "difficult",
     "prompt": "Customers who purchased tracks from more than one genre. Return customer id, first name, last name, and number of distinct genres.",
-    "gold_sql": "SELECT Customer.CustomerId, Customer.FirstName, Customer.LastName, COUNT(DISTINCT Genre.GenreId) AS DistinctGenres FROM Customer INNER JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId INNER JOIN InvoiceLine ON InvoiceLine.InvoiceId = Invoice.InvoiceId INNER JOIN Track ON Track.TrackId = InvoiceLine.TrackId INNER JOIN Genre ON Genre.GenreId = Track.GenreId GROUP BY Customer.CustomerId, Customer.FirstName, Customer.LastName HAVING COUNT(DISTINCT Genre.GenreId) > 1 ORDER BY DistinctGenres DESC, Customer.LastName ASC, Customer.FirstName ASC;"
+    "gold_sql": "SELECT c.CustomerId, c.FirstName, c.LastName, COUNT(DISTINCT g.GenreId) AS DistinctGenres FROM Customer c JOIN Invoice i ON i.CustomerId = c.CustomerId JOIN InvoiceLine il ON il.InvoiceId = i.InvoiceId JOIN Track t ON t.TrackId = il.TrackId JOIN Genre g ON g.GenreId = t.GenreId GROUP BY c.CustomerId, c.FirstName, c.LastName HAVING DistinctGenres > 1 ORDER BY DistinctGenres DESC, c.LastName, c.FirstName;"
   }
 ]

@@ -57,11 +57,12 @@ def text_to_sql(question, k=3, model_name="gpt-4o-mini"):
     ctx = "\n".join(ctx_texts) if ctx_texts else ""
 
     prompt = (
-        "You are a SQL assistant for Spark SQL.\n"
-        "Use ONLY the columns present in the provided schemas. "
-        "Output ONLY the SQL query (no explanations).\n\n"
+        "Use **SQLite** only. Dates via STRFTIME('%Y',col)/STRFTIME('%m',col) "
+        "(no YEAR/MONTH/DATE_TRUNC). Use LIMIT (not TOP). Case-insensitive match "
+        "with LOWER(col) LIKE LOWER(:v) (not ILIKE). Concatenate with || (not CONCAT). "
+        "Booleans 1/0. Use only given tables/columns. Output only one SQL ending with ';'.\n\n"
         f"Schemas:\n{ctx}\n\n"
-        f"User question:\n{question}\n"
+        f"Question:\n{question}\n"
     )
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     resp = client.responses.create(model=model_name, input=prompt)

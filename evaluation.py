@@ -1,6 +1,9 @@
 # Databricks notebook source
 import json
 import pandas as pd
+import numpy as np
+
+
 with open("sql_eval_dataset.json", "r", encoding="utf-8") as f:
     dataset = json.load(f)
 

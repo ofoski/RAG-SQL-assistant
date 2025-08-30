@@ -1,5 +1,6 @@
 # Databricks notebook source
-#%pip install streamlit openai faiss-cpu sentence-transformers numpy pandas rouge-score pyspark kagglehub #threadpoolctl==3.5.0
+# MAGIC %pip install streamlit openai faiss-cpu sentence-transformers numpy pandas rouge-score kagglehub threadpoolctl==3.5
+# MAGIC
 
 # COMMAND ----------
 
@@ -21,12 +22,12 @@ import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
+model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 def transform_embeddings():
     embeddings = model.encode(texts, normalize_embeddings=True).astype("float32")
     dim = embeddings.shape[1]
-    index = faiss.IndexFlatL2(dim)
+    index = faiss.IndexFlatIP(dim)
     index.add(embeddings)
     return index
    
@@ -49,28 +50,35 @@ def build_context(question, k=3):
 
 # COMMAND ----------
 
-from openai import OpenAI, RateLimitError
+from openai import OpenAI
 import os
 
 def text_to_sql(question, k=3, model_name="gpt-4o-mini"):
     ctx_texts, _ = retrieve_tables(question, k=k)
     ctx = "\n".join(ctx_texts) if ctx_texts else ""
 
-    prompt = (
-        "Use **SQLite** only. Dates via STRFTIME('%Y',col)/STRFTIME('%m',col) "
-        "(no YEAR/MONTH/DATE_TRUNC). Use LIMIT (not TOP). Case-insensitive match "
-        "with LOWER(col) LIKE LOWER(:v) (not ILIKE). Concatenate with || (not CONCAT). "
-        "Booleans 1/0. Use only given tables/columns. Output only one SQL ending with ';'.\n\n"
-        f"Schemas:\n{ctx}\n\n"
-        f"Question:\n{question}\n"
-    )
+    
+    prompt = f"""SQLite only. Follow these rules exactly:
+
+- Use STRFTIME('%Y', col) or STRFTIME('%m', col) for year/month extraction.
+- Never use YEAR(), MONTH(), or DATE_TRUNC().
+- Use LIMIT instead of TOP.
+- Only use tables and columns from the schema provided.
+- Return exactly the fields the question asks for, in that order; no extras.
+- For revenue, use SUM(InvoiceLine.UnitPrice * InvoiceLine.Quantity) when both columns exist.
+- Use explicit JOIN ... ON ... (no comma joins).
+- Include all non-aggregated selected columns in GROUP BY.
+- Return a single SQL statement ending with a semicolon (;).
+
+Schemas:
+{ctx}
+
+Question:
+{question}
+"""
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    resp = client.responses.create(model=model_name, input=prompt)
+    resp = client.responses.create(model=model_name, input=prompt, temperature=0)
     sql_text = resp.output_text.strip()
     sql_text = sql_text.replace("```sql", "").replace("```", "").strip()
     
     return sql_text
-
-# COMMAND ----------
-
-

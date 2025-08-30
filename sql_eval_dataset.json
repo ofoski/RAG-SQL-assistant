@@ -25,9 +25,10 @@
   "gold_sql": "SELECT Track.Name AS TrackName FROM Track ORDER BY Track.TrackId ASC LIMIT 10;"
   },
   {
-    "difficulty": "medium",
-    "prompt": "Show the top 5 artists with the most tracks in the catalog. Return artist name from the Artist table and the number of tracks from the Track table, ordered by track count descending.",
-    "gold_sql": "SELECT Customer.CustomerId, SUM(Invoice.Total) AS total_spent FROM Customer JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId GROUP BY Customer.CustomerId ORDER BY total_spent DESC;"
+    {
+  "difficulty": "medium",
+  "prompt": "Top 5 albums by track count. Include AlbumTitle and TrackCount, ordered by TrackCount descending; if tied, by AlbumTitle ascending.",
+  "gold_sql": "SELECT Album.Title AS AlbumTitle, COUNT(Track.TrackId) AS TrackCount FROM Album JOIN Track ON Track.AlbumId = Album.AlbumId GROUP BY Album.AlbumId, Album.Title ORDER BY TrackCount DESC, AlbumTitle ASC LIMIT 5;"
   },
   {
     "difficulty": "medium",
@@ -70,8 +71,8 @@
     "gold_sql": "SELECT Genre.Name AS GenreName, AVG(Track.Milliseconds) / 1000.0 AS AvgSeconds FROM Track INNER JOIN Genre ON Track.GenreId = Genre.GenreId GROUP BY Genre.GenreId, Genre.Name ORDER BY AvgSeconds DESC, GenreName ASC LIMIT 5;"
   },
   {
-    "difficulty": "difficult",
-    "prompt": "Customers who purchased tracks from more than one genre. Return CustomerId, FirstName, LastName, DistinctGenres. Order by DistinctGenres descending; if equal, order by LastName then FirstName. Limit 10.",
-    "gold_sql": "SELECT Customer.CustomerId, Customer.FirstName, Customer.LastName, COUNT(DISTINCT Genre.GenreId) AS DistinctGenres FROM Customer INNER JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId INNER JOIN InvoiceLine ON InvoiceLine.InvoiceId = Invoice.InvoiceId INNER JOIN Track ON Track.TrackId = InvoiceLine.TrackId INNER JOIN Genre ON Genre.GenreId = Track.GenreId GROUP BY Customer.CustomerId, Customer.FirstName, Customer.LastName HAVING COUNT(DISTINCT Genre.GenreId) > 1 ORDER BY DistinctGenres DESC, Customer.LastName ASC, Customer.FirstName ASC LIMIT 10;"
-  }
+  "difficulty": "difficult",
+  "prompt": "Top 10 customers by number of invoices. Include columns CustomerId, FirstName, LastName, InvoiceCount; order by InvoiceCount descending; if tied, by LastName then FirstName.",
+  "gold_sql": "SELECT Customer.CustomerId, Customer.FirstName, Customer.LastName, COUNT(Invoice.InvoiceId) AS InvoiceCount FROM Customer JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId GROUP BY Customer.CustomerId, Customer.FirstName, Customer.LastName ORDER BY InvoiceCount DESC, Customer.LastName ASC, Customer.FirstName ASC LIMIT 10;"
+}
 ]

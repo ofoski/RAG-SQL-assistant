@@ -20,9 +20,9 @@
     "gold_sql": "SELECT Title FROM Album ORDER BY AlbumId ASC LIMIT 5;"
   },
   {
-    "difficulty": "easy",
-    "prompt": "Show the 5 most expensive tracks by unit price.",
-    "gold_sql": "SELECT Name, UnitPrice FROM Track ORDER BY UnitPrice DESC, Name ASC LIMIT 5;"
+    "difficulty": "medium",
+    "prompt": "Show the top 5 artists with the most tracks in the catalog. Return artist name from the Artist table and the number of tracks from the Track table, ordered by track count descending.",
+    "gold_sql": "SELECT Customer.CustomerId, SUM(Invoice.Total) AS total_spent FROM Customer JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId GROUP BY Customer.CustomerId ORDER BY total_spent DESC;"
   },
   {
     "difficulty": "medium",
@@ -36,43 +36,43 @@
   },
   {
     "difficulty": "medium",
-    "prompt": "Show each customer's total amount spent, ordered by highest total.",
+    "prompt": "Each customer's total spent. Return customer_id, first_name, last_name, total_spent. Order by total_spent descending; if equal, order by last_name then first_name.",
     "gold_sql": "SELECT Customer.CustomerId, Customer.FirstName, Customer.LastName, SUM(Invoice.Total) AS TotalSpent FROM Customer INNER JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId GROUP BY Customer.CustomerId, Customer.FirstName, Customer.LastName ORDER BY TotalSpent DESC, Customer.LastName ASC, Customer.FirstName ASC;"
   },
   {
     "difficulty": "medium",
-    "prompt": "How many tracks are in each playlist? Return playlist name and track count, highest first.",
-    "gold_sql": "SELECT Playlist.Name AS PlaylistName, COUNT(PlaylistTrack.TrackId) AS TrackCount FROM Playlist INNER JOIN PlaylistTrack ON Playlist.PlaylistId = PlaylistTrack.PlaylistId GROUP BY Playlist.PlaylistId, Playlist.Name ORDER BY TrackCount DESC, PlaylistName ASC;"
+    "prompt": "Show the top 5 customers by total amount spent. Return customer ID and country from the Customer table, and the total amount from the Invoice table, order by highest total.",
+    "gold_sql": "SELECT Customer.CustomerId, Customer.Country, SUM(Invoice.Total) AS total_spent FROM Customer JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId GROUP BY Customer.CustomerId, Customer.Country ORDER BY total_spent DESC LIMIT 5;"
   },
   {
     "difficulty": "medium",
-    "prompt": "Show the top 5 customers by total amount spent, including their country.",
-    "gold_sql": "SELECT Customer.CustomerId, Customer.FirstName, Customer.LastName, Customer.Country, SUM(Invoice.Total) AS TotalSpent FROM Customer INNER JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId GROUP BY Customer.CustomerId, Customer.FirstName, Customer.LastName, Customer.Country ORDER BY TotalSpent DESC, Customer.LastName ASC, Customer.FirstName ASC LIMIT 5;"
+    "prompt": "Tracks per genre. Return genre name from the Genre table and track count from the Track table, order by track count descending. If tied, order by genre name ascending.",
+    "gold_sql": "SELECT Genre.Name, COUNT(Track.TrackId) AS track_count FROM Genre JOIN Track ON Genre.GenreId = Track.GenreId GROUP BY Genre.GenreId, Genre.Name ORDER BY track_count DESC;"
+    
   },
-[
   {
     "difficulty": "difficult",
     "prompt": "Which genres generated the most revenue? Return genre and total revenue, top 5.",
-    "gold_sql": "SELECT g.Name AS GenreName, SUM(il.UnitPrice * il.Quantity) AS Revenue FROM InvoiceLine il JOIN Track t ON il.TrackId = t.TrackId JOIN Genre g ON t.GenreId = g.GenreId GROUP BY g.GenreId, g.Name ORDER BY Revenue DESC, g.Name LIMIT 5;"
+    "gold_sql": "SELECT Genre.Name AS GenreName, SUM(InvoiceLine.UnitPrice * InvoiceLine.Quantity) AS Revenue FROM InvoiceLine INNER JOIN Track ON InvoiceLine.TrackId = Track.TrackId INNER JOIN Genre ON Track.GenreId = Genre.GenreId GROUP BY Genre.GenreId, Genre.Name ORDER BY Revenue DESC, GenreName ASC LIMIT 5;"
   },
   {
     "difficulty": "difficult",
-    "prompt": "Monthly revenue by year and month. Return year, month number, and total revenue, ordered by year then month.",
-    "gold_sql": "SELECT CAST(STRFTIME('%Y', i.InvoiceDate) AS INT) AS Year, CAST(STRFTIME('%m', i.InvoiceDate) AS INT) AS Month, SUM(i.Total) AS Revenue FROM Invoice i GROUP BY Year, Month ORDER BY Year, Month;"
+    "prompt": "Monthly revenue by year and month. Return year as an integer, month as a zero-padded string, and total revenue, order by year ascending then month ascending.",
+    "gold_sql": "SELECT CAST(STRFTIME('%Y', Invoice.InvoiceDate) AS INTEGER) AS Year, CAST(STRFTIME('%m', Invoice.InvoiceDate) AS INTEGER) AS Month, SUM(Invoice.Total) AS Revenue FROM Invoice GROUP BY Year, Month ORDER BY Year ASC, Month ASC;"
   },
   {
     "difficulty": "difficult",
-    "prompt": "Top 5 artists by number of tracks in the catalog.",
-    "gold_sql": "SELECT a.Name AS ArtistName, COUNT(t.TrackId) AS TrackCount FROM Artist a JOIN Album al ON al.ArtistId = a.ArtistId JOIN Track t ON t.AlbumId = al.AlbumId GROUP BY a.ArtistId, a.Name ORDER BY TrackCount DESC, a.Name LIMIT 5;"
+    "prompt": "Top 5 artists by number of tracks in the catalog. Return artist name from the Artist table and track count from the Track table, order by track count descending. If tied, order by artist name ascending.",
+    "gold_sql": "SELECT Artist.Name AS ArtistName, COUNT(Track.TrackId) AS TrackCount FROM Artist INNER JOIN Album ON Album.ArtistId = Artist.ArtistId INNER JOIN Track ON Track.AlbumId = Album.AlbumId GROUP BY Artist.ArtistId, Artist.Name ORDER BY TrackCount DESC, ArtistName ASC LIMIT 5;"
   },
   {
     "difficulty": "difficult",
-    "prompt": "Average track length in seconds per genre, top 5 longest on average.",
-    "gold_sql": "SELECT g.Name AS GenreName, AVG(t.Milliseconds)/1000.0 AS AvgSeconds FROM Track t JOIN Genre g ON t.GenreId = g.GenreId GROUP BY g.GenreId, g.Name ORDER BY AvgSeconds DESC, g.Name LIMIT 5;"
+    "prompt": "Average track length per genre, top 5. Return GenreName and AvgSeconds. Order by AvgSeconds descending.",
+    "gold_sql": "SELECT Genre.Name AS GenreName, AVG(Track.Milliseconds) / 1000.0 AS AvgSeconds FROM Track INNER JOIN Genre ON Track.GenreId = Genre.GenreId GROUP BY Genre.GenreId, Genre.Name ORDER BY AvgSeconds DESC, GenreName ASC LIMIT 5;"
   },
   {
     "difficulty": "difficult",
-    "prompt": "Customers who purchased tracks from more than one genre. Return customer id, first name, last name, and number of distinct genres.",
-    "gold_sql": "SELECT c.CustomerId, c.FirstName, c.LastName, COUNT(DISTINCT g.GenreId) AS DistinctGenres FROM Customer c JOIN Invoice i ON i.CustomerId = c.CustomerId JOIN InvoiceLine il ON il.InvoiceId = i.InvoiceId JOIN Track t ON t.TrackId = il.TrackId JOIN Genre g ON g.GenreId = t.GenreId GROUP BY c.CustomerId, c.FirstName, c.LastName HAVING DistinctGenres > 1 ORDER BY DistinctGenres DESC, c.LastName, c.FirstName;"
+    "prompt": "Customers who purchased tracks from more than one genre. Return CustomerId, FirstName, LastName, DistinctGenres. Order by DistinctGenres descending; if equal, order by LastName then FirstName. Limit 10.",
+    "gold_sql": "SELECT Customer.CustomerId, Customer.FirstName, Customer.LastName, COUNT(DISTINCT Genre.GenreId) AS DistinctGenres FROM Customer INNER JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId INNER JOIN InvoiceLine ON InvoiceLine.InvoiceId = Invoice.InvoiceId INNER JOIN Track ON Track.TrackId = InvoiceLine.TrackId INNER JOIN Genre ON Genre.GenreId = Track.GenreId GROUP BY Customer.CustomerId, Customer.FirstName, Customer.LastName HAVING COUNT(DISTINCT Genre.GenreId) > 1 ORDER BY DistinctGenres DESC, Customer.LastName ASC, Customer.FirstName ASC LIMIT 10;"
   }
 ]

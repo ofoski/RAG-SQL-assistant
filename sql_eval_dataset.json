@@ -72,7 +72,7 @@
   },
   {
   "difficulty": "difficult",
-  "prompt": "Top 10 customers by number of invoices. Include columns CustomerId, FirstName, LastName, InvoiceCount; order by InvoiceCount descending; if tied, by LastName then FirstName.",
-  "gold_sql": "SELECT Customer.CustomerId, Customer.FirstName, Customer.LastName, COUNT(Invoice.InvoiceId) AS InvoiceCount FROM Customer JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId GROUP BY Customer.CustomerId, Customer.FirstName, Customer.LastName ORDER BY InvoiceCount DESC, Customer.LastName ASC, Customer.FirstName ASC LIMIT 10;"
-}
+  "prompt": "Top 5 artists by total revenue. Include ArtistName and Revenue, ordered by Revenue descending; if tied, by ArtistName ascending.",
+  "gold_sql": "SELECT Artist.Name AS ArtistName, SUM(InvoiceLine.UnitPrice * InvoiceLine.Quantity) AS Revenue FROM Artist JOIN Album ON Album.ArtistId = Artist.ArtistId JOIN Track ON Track.AlbumId = Album.AlbumId JOIN InvoiceLine ON InvoiceLine.TrackId = Track.TrackId GROUP BY Artist.ArtistId, Artist.Name ORDER BY Revenue DESC, ArtistName ASC LIMIT 5;"
+  }
 ]

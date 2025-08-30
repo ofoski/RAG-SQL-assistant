@@ -88,13 +88,15 @@ ROUGE was first used to evaluate the similarity between the generated SQL text a
 To measure real-time effectiveness, a **JSON evaluation dataset** (`sql_eval_dataset.json`) was created, pairing natural-language prompts with gold SQL queries.  
 
 Each prompt in the dataset is labeled with a difficulty level:  
-- 🟢 5 **easy** prompts (basic selections, counts, limits)  
-- 🟡 5 **medium** prompts (joins, groupings, simple aggregations)  
-- 🔴 5 **difficult** prompts (nested queries, multiple joins, ordering with tie-breakers)  
 
-The generated SQL was executed and compared against this dataset. In many cases (e.g., *“Top 5 artists by track count”*), the model produced queries that returned the **exact same results** as the reference SQL, while also achieving high ROUGE scores.  
+- 🟢 **Easy** → basic listing, ordering, or counting queries  
+- 🟡 **Medium** → queries involving joins, grouping, or simple aggregations  
+- 🔴 **Difficult** → queries with multiple joins, revenue calculations, or more complex conditions  
+
+The generated SQL was executed and compared against this dataset. In many cases, the model produced queries that returned the **exact same results** as the reference SQL, while also achieving high ROUGE scores.  
 
 This demonstrates both the **textual accuracy** and the **practical effectiveness** of the assistant in converting natural-language questions into correct SQL statements.  
+ 
 
 
 

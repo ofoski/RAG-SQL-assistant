@@ -34,7 +34,7 @@ def preview_table(sqlite_file: str, table: str, n: int = 5) -> pd.DataFrame:
     """Preview the first n rows of a given table."""
     conn = sqlite3.connect(sqlite_file, check_same_thread=False)
     try:
-        return pd.read_sql_query(f'SELECT * FROM "{table}" LIMIT {n};', conn)
+        return pd.read_sql_query(f'SELECT * FROM "{table}" LIMIT {n};', conn).drop_duplicates().reset_index(drop=True)
     finally:
         conn.close()
 
@@ -85,10 +85,6 @@ def get_text():
         text += '\n'
     texts = [t.strip().rstrip(',') for t in text.split("\n") if t.strip()]
     return texts
-
-
-# COMMAND ----------
-
 
 
 # COMMAND ----------

@@ -60,7 +60,7 @@ def rouge_accuracy_scores():
         rouge_l = score['rougeL'].fmeasure
         rouge_scores.append(rouge_l)
         try:
-            if np.array_equal(run_query(result[i]).values, run_query(dataset[i]["gold_sql"]).values):
+            if np.array_equal(run_query(pred_sql).values, run_query(dataset[i]["gold_sql"]).values):
                 accuracy += 1
         except Exception:
             pass

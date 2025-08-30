@@ -20,6 +20,11 @@
     "gold_sql": "SELECT Title FROM Album ORDER BY AlbumId ASC LIMIT 5;"
   },
   {
+  "difficulty": "easy",
+  "prompt": "Show the first 10 tracks, include only the track name, ordered by track ID ascending.",
+  "gold_sql": "SELECT Track.Name AS TrackName FROM Track ORDER BY Track.TrackId ASC LIMIT 10;"
+  },
+  {
     "difficulty": "medium",
     "prompt": "Show the top 5 artists with the most tracks in the catalog. Return artist name from the Artist table and the number of tracks from the Track table, ordered by track count descending.",
     "gold_sql": "SELECT Customer.CustomerId, SUM(Invoice.Total) AS total_spent FROM Customer JOIN Invoice ON Invoice.CustomerId = Customer.CustomerId GROUP BY Customer.CustomerId ORDER BY total_spent DESC;"
@@ -28,11 +33,6 @@
     "difficulty": "medium",
     "prompt": "List album titles with their artist names (first 10 by artist then album).",
     "gold_sql": "SELECT Album.Title AS AlbumTitle, Artist.Name AS ArtistName FROM Album INNER JOIN Artist ON Album.ArtistId = Artist.ArtistId ORDER BY Artist.Name ASC, Album.Title ASC LIMIT 10;"
-  },
-  {
-    "difficulty": "medium",
-    "prompt": "Show track name, album title, and genre name for the first 10 tracks.",
-    "gold_sql": "SELECT Track.Name AS TrackName, Album.Title AS AlbumTitle, Genre.Name AS GenreName FROM Track INNER JOIN Album ON Track.AlbumId = Album.AlbumId INNER JOIN Genre ON Track.GenreId = Genre.GenreId ORDER BY Track.TrackId ASC LIMIT 10;"
   },
   {
     "difficulty": "medium",
@@ -48,7 +48,6 @@
     "difficulty": "medium",
     "prompt": "Tracks per genre. Return genre name from the Genre table and track count from the Track table, order by track count descending. If tied, order by genre name ascending.",
     "gold_sql": "SELECT Genre.Name, COUNT(Track.TrackId) AS track_count FROM Genre JOIN Track ON Genre.GenreId = Track.GenreId GROUP BY Genre.GenreId, Genre.Name ORDER BY track_count DESC;"
-    
   },
   {
     "difficulty": "difficult",

@@ -82,8 +82,7 @@ path = kagglehub.dataset_download("ranasabrii/chinook")  # change slug here
 <img width="2846" height="1528" alt="image" src="https://github.com/user-attachments/assets/1ee5a42e-b6b6-4e71-aaf5-4ae323d8dfaa" />
 
 ## 🎥 Demo Video
-C:\Users\AGhan\Videos\ScreenRecorderFiles\20250829
-
+https://github.com/user-attachments/assets/726314cd-e64d-4833-ae02-ef57e8854564
 
 ## 📏 Evaluation  
 

@@ -82,6 +82,19 @@ path = kagglehub.dataset_download("ranasabrii/chinook")  # change slug here
 <img width="2846" height="1528" alt="image" src="https://github.com/user-attachments/assets/1ee5a42e-b6b6-4e71-aaf5-4ae323d8dfaa" />
 
 
-## Example
+## 📏 Evaluation  
+
+ROUGE was first used to evaluate the similarity between the generated SQL text and the reference (gold) SQL.  
+To measure real-time effectiveness, a **JSON evaluation dataset** (`sql_eval_dataset.json`) was created, pairing natural-language prompts with gold SQL queries.  
+
+Each prompt in the dataset is labeled with a difficulty level:  
+- 🟢 5 **easy** prompts (basic selections, counts, limits)  
+- 🟡 5 **medium** prompts (joins, groupings, simple aggregations)  
+- 🔴 5 **difficult** prompts (nested queries, multiple joins, ordering with tie-breakers)  
+
+The generated SQL was executed and compared against this dataset. In many cases (e.g., *“Top 5 artists by track count”*), the model produced queries that returned the **exact same results** as the reference SQL, while also achieving high ROUGE scores.  
+
+This demonstrates both the **textual accuracy** and the **practical effectiveness** of the assistant in converting natural-language questions into correct SQL statements.  
+
 
 

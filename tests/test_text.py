@@ -1,21 +1,15 @@
-# tests/test_pipeline_mocked.py
-from rag_core import text_to_sql
-from load_data import run_query
+from load_data import get_metadata, run_query
+import pandas as pd
 
-def test_pipeline_from_text_mocked(monkeypatch):
-    """Mock LLM step so pipeline can run without OpenAI key"""
-    fake_sql = """
-    SELECT Artist.Name, COUNT(Album.AlbumId) AS AlbumCount
-    FROM Artist
-    JOIN Album ON Artist.ArtistId = Album.ArtistId
-    GROUP BY Artist.Name
-    ORDER BY AlbumCount DESC
-    LIMIT 1;
-    """
-    monkeypatch.setattr("rag_core.text_to_sql", lambda _: fake_sql)
-
-    sql = text_to_sql("Which artist has the most albums?")
-    df = run_query(sql)
-
+def test_simple_count_query():
+    df = run_query("SELECT COUNT(*) as n FROM Customer;")
+    assert "n" in df.columns
     assert df.shape[0] == 1
-    assert "AlbumCount" in df.columns
+
+def test_artist_table_exists():
+    tables = {m["table"] for m in get_metadata()}
+    assert "Artist" in tables
+
+def test_run_query_returns_dataframe():
+    df = run_query("SELECT Name FROM Artist LIMIT 1;")
+    assert isinstance(df, pd.DataFrame)

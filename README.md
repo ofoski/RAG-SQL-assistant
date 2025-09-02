@@ -7,6 +7,7 @@
 A Retrieval-Augmented Generation (RAG) SQL assistant built with **Streamlit**, **FAISS**, and **OpenAI**.  
 It converts natural-language questions into SQL queries and executes them on SQLite databases.
 
+---
 
 ## ✨ Features
 - 🔎 **Natural Language → SQL** conversion  
@@ -33,7 +34,9 @@ It converts natural-language questions into SQL queries and executes them on SQL
 4. 🎯 **RAG retrieval** → fetch the top-K relevant tables for each question.  
 5. 🤖 **Generate SQL** → build a focused prompt and produce SQL with OpenAI.  
 6. 📊 **Preview results** → execute SQL against SQLite and display in Streamlit.  
-  
+
+---
+
 ## Installation (Windows)
 
 ### 1) Clone the repo
@@ -72,7 +75,7 @@ Run the command in the terminal.
 ```powershell
 streamlit run streamlit.py
 ```
-
+---
 ## Dataset
 
 The assistant is scoped to the Chinook dataset by default and is automatically downloaded via KaggleHub (no DB file committed).  

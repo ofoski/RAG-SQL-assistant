@@ -8,29 +8,31 @@ A Retrieval-Augmented Generation (RAG) SQL assistant built with **Streamlit**, *
 It converts natural-language questions into SQL queries and executes them on SQLite databases.
 
 
-## 🎯 Goal
-Convert natural-language questions into **SQL queries** and run them on SQLite tables using **pandas**.
+## ✨ Features
+- 🔎 **Natural Language → SQL** conversion  
+- 🧠 **Schema-Aware Retrieval** with FAISS embeddings  
+- 📊 **Interactive UI** powered by Streamlit  
+- 🌍 **Dataset Flexibility** – works with Chinook by default, easily swappable to other KaggleHub datasets  
+- 🧪 **Evaluation Framework** with prompts + gold SQL pairs  
 
+---
 
 ## ⚙️ Stack
-- **Streamlit** (UI)  
-- **SentenceTransformers** (embeddings)  
-- **FAISS** (vector search)  
-- **OpenAI** (SQL generation)  
+- **Streamlit** – UI  
+- **SentenceTransformers** – embeddings  
+- **FAISS** – vector search  
+- **OpenAI** – SQL generation  
+- **SQLite + pandas** – execution  
 
-
-## 🌍 Scope
-- Works on the **Chinook SQLite dataset** by default  
-- Easily swappable to other **KaggleHub SQLite datasets**  
-
+---
 
 ## 🛠️ Main Steps
-- 📑 Extract metadata → read tables and columns from the Chinook SQLite database.  
-- 🔡 Vectorize schema → create SentenceTransformers embeddings of per-table schema text.  
-- ⚡ Index with FAISS → store embeddings in a FAISS index for fast similarity search.  
-- 🎯 RAG retrieval → fetch the top-K relevant tables for each user question.  
-- 🤖 Generate SQL → build a focused prompt and produce SQL with ChatGPT.  
-- 📊 Preview results → execute the SQL against SQLite and display in Streamlit.
+1. 📑 **Extract metadata** → read tables and columns from the SQLite database.  
+2. 🔡 **Vectorize schema** → create SentenceTransformers embeddings of per-table schema text.  
+3. ⚡ **Index with FAISS** → store embeddings in FAISS for fast similarity search.  
+4. 🎯 **RAG retrieval** → fetch the top-K relevant tables for each question.  
+5. 🤖 **Generate SQL** → build a focused prompt and produce SQL with OpenAI.  
+6. 📊 **Preview results** → execute SQL against SQLite and display in Streamlit.  
   
 ## Installation (Windows)
 

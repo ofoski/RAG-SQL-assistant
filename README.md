@@ -103,20 +103,16 @@ LIMIT 1;
 https://github.com/user-attachments/assets/a270f159-479f-4efe-a708-0e4fa615780d
 
 
-## 📏 Evaluation  
+## 📏 Evaluation
 
-ROUGE was first used to evaluate the similarity between the generated SQL text and the reference (gold) SQL.  
-To measure real-time effectiveness, a **JSON evaluation dataset** (`sql_eval_dataset.json`) was created, pairing natural-language prompts with gold SQL queries.  
+- **ROUGE** → used to evaluate SQL similarity  
+- **Execution Accuracy** → compared against reference outputs  
+- **Evaluation dataset** → [`sql_eval_dataset.json`](./sql_eval_dataset.json)  
 
-Each prompt in the dataset is labeled with a difficulty level:  
-
-- 🟢 **Easy** → basic listing, ordering, or counting queries  
-- 🟡 **Medium** → queries involving joins, grouping, or simple aggregations  
-- 🔴 **Difficult** → queries with multiple joins, revenue calculations, or more complex conditions  
-
-The generated SQL was executed and compared against this dataset. In many cases, the model produced queries that returned the **exact same results** as the reference SQL, while also achieving high ROUGE scores.  
-
-This demonstrates both the **textual accuracy** and the **practical effectiveness** of the assistant in converting natural-language questions into correct SQL statements.  
+**Difficulty levels:**  
+- 🟢 **Easy** → simple queries  
+- 🟡 **Medium** → joins & grouping  
+- 🔴 **Difficult** → multi-joins, aggregations, revenue calculations   
  
 
 

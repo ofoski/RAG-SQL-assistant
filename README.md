@@ -112,7 +112,11 @@ https://github.com/user-attachments/assets/a270f159-479f-4efe-a708-0e4fa615780d
 **Difficulty levels:**  
 - 🟢 **Easy** → simple queries  
 - 🟡 **Medium** → joins & grouping  
-- 🔴 **Difficult** → multi-joins, aggregations, revenue calculations   
+- 🔴 **Difficult** → multi-joins, aggregations, revenue calculations
+
+**Results:**  
+✅ The assistant successfully generated correct SQL queries for **all examples** in the evaluation dataset,  
+returning the same results as the gold SQL.
  
 
 

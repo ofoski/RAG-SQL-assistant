@@ -81,6 +81,21 @@ import kagglehub
 path = kagglehub.dataset_download("ranasabrii/chinook")  # change slug here
 ```
 
+## 📊 Example Usage
+
+**Question:**  
+*"Which artist has the most albums?"*
+
+**Generated SQL:**  
+```sql
+SELECT Artist.Name, COUNT(Album.AlbumId) AS AlbumCount
+FROM Artist
+JOIN Album ON Artist.ArtistId = Album.ArtistId
+GROUP BY Artist.Name
+ORDER BY AlbumCount DESC
+LIMIT 1;
+```
+
 ## 🖼️ Screenshot
 <img width="2846" height="1528" alt="image" src="https://github.com/user-attachments/assets/1ee5a42e-b6b6-4e71-aaf5-4ae323d8dfaa" />
 

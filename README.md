@@ -2,7 +2,6 @@
 
 [![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-310/)
 ![Build](https://github.com/ofoski/RAG-SQL-assistant/actions/workflows/python-app.yml/badge.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 A Retrieval-Augmented Generation (RAG) SQL assistant built with **Streamlit**, **FAISS**, and **OpenAI**.  
 It converts natural-language questions into SQL queries and executes them on SQLite databases.

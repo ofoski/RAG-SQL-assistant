@@ -1,6 +1,6 @@
 # 🎵 RAG-SQL Assistant (Chinook)
 
-[![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-310/)
+[![Python](https://img.shields.io/badge/python-blue.svg)](https://www.python.org/downloads/release/python-310/)
 ![Build](https://github.com/ofoski/RAG-SQL-assistant/actions/workflows/python-app.yml/badge.svg)
 
 A Retrieval-Augmented Generation (RAG) SQL assistant built with **Streamlit**, **FAISS**, and **OpenAI**.  

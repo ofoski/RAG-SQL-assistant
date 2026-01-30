@@ -7,7 +7,8 @@
 - **Problem:** Translating natural-language questions into correct SQL queries  
 - **Solution:** Schema-aware Retrieval-Augmented Generation (RAG) pipeline over database metadata 
 - **Outcome:** 100% execution accuracy on a curated evaluation set of reference SQL queries  
-- **Stack:** Python, Streamlit, FAISS, SentenceTransformers, OpenAI, SQLite  
+- Stack: Python; Streamlit (UI); FAISS + SentenceTransformers (retrieval & embeddings); OpenAI (LLM); SQLite (execution)
+
 
 A schema-aware **Retrieval-Augmented Generation (RAG)** SQL assistant that converts natural-language questions into executable SQL queries and runs them against SQLite databases.
 

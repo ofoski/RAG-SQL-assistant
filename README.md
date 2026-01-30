@@ -28,12 +28,13 @@ A schema-aware **Retrieval-Augmented Generation (RAG)** SQL assistant that conve
 
 
 ## 🛠️ Pipeline Overview
-1. 📑 **Extract schema metadata** – read table names, columns, and relationships from the SQLite database  
-2. 🔡 **Embed schemas** – generate SentenceTransformers embeddings for per-table schema text  
-3. ⚡ **Index embeddings** – store schema embeddings in a FAISS index for similarity search  
-4. 🎯 **Retrieve relevant tables** – select top-K schemas most relevant to each user question  
-5. 🤖 **Generate SQL** – construct a constrained prompt and generate SQL using an OpenAI language model  
-6. 📊 **Execute and display results** – run SQL against SQLite and render outputs in Streamlit 
+1. 📑 **Extract schema information** – read table names and column details from the SQLite database  
+2. 🔡 **Embed schemas** – represent each table schema as a dense vector using a pretrained sentence embedding model  
+3. ⚡ **Index schemas** – store schema embeddings in a vector index to enable efficient similarity search  
+4. 🎯 **Retrieve relevant tables** – select the most relevant table schemas for each user question  
+5. 🤖 **Generate SQL** – generate a SQLite-compatible SQL query using a language model constrained by the retrieved schemas  
+6. 📊 **Execute and display results** – run the generated query and display results in an interactive interface  
+
 
 
 ## Installation (Windows)

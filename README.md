@@ -3,8 +3,13 @@
 [![Python](https://img.shields.io/badge/python-blue.svg)](https://www.python.org/downloads/release/python-310/)
 ![Build](https://github.com/ofoski/RAG-SQL-assistant/actions/workflows/python-app.yml/badge.svg)
 
-A Retrieval-Augmented Generation (RAG) SQL assistant built with **Streamlit**, **FAISS**, and **OpenAI**.  
-It converts natural-language questions into SQL queries and executes them on SQLite databases.
+### 🔍 At a glance
+- **Problem:** Translating natural-language questions into correct SQL queries  
+- **Solution:** Schema-aware Retrieval-Augmented Generation (RAG) pipeline over database metadata  
+- **Outcome:** 100% execution accuracy on a curated evaluation set of reference SQL queries  
+- **Stack:** Python, Streamlit, FAISS, SentenceTransformers, OpenAI, SQLite  
+
+A schema-aware **Retrieval-Augmented Generation (RAG)** SQL assistant that converts natural-language questions into executable SQL queries and runs them against SQLite databases.
 
 ## ✨ Features
 - 🔎 **Natural Language → SQL** conversion  
@@ -21,7 +26,7 @@ It converts natural-language questions into SQL queries and executes them on SQL
 - **SQLite + pandas** – execution  
 
 
-## 🛠️ Main Steps
+## 🛠️ Pipeline Overview
 1. 📑 **Extract metadata** → read tables and columns from the SQLite database.  
 2. 🔡 **Vectorize schema** → create SentenceTransformers embeddings of per-table schema text.  
 3. ⚡ **Index with FAISS** → store embeddings in FAISS for fast similarity search.  

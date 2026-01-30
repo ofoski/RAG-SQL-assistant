@@ -19,7 +19,6 @@
 
 A schema-aware **Retrieval-Augmented Generation (RAG)** SQL assistant that converts natural-language questions into executable SQL queries and executes them directly against a SQLite database.
 
-
 ## ✨ Features
 - 🔎 **Natural Language → SQL** conversion  
 - 🧠 **Schema-Aware Retrieval** via FAISS similarity search over SentenceTransformers embeddings  

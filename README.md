@@ -8,14 +8,14 @@
 - **Solution:** Schema-aware Retrieval-Augmented Generation (RAG) pipeline using SentenceTransformers embeddings and FAISS similarity search over SQLite database schemas  
 - **Outcome:** 100% execution accuracy on a curated evaluation set of reference SQL queries  
 - **Stack:**  
-  ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-  ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
-  ![FAISS](https://img.shields.io/badge/FAISS-005571)
-  ![SentenceTransformers](https://img.shields.io/badge/SentenceTransformers-3B82F6)
-  ![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white)
-  ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
-  ![RAG](https://img.shields.io/badge/RAG-0F766E)
-  ![GenAI](https://img.shields.io/badge/GenAI-7C3AED)
+![RAG](https://img.shields.io/badge/RAG-0F766E)
+![GenAI](https://img.shields.io/badge/GenAI-7C3AED)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white)
+![SentenceTransformers](https://img.shields.io/badge/SentenceTransformers-3B82F6)
+![FAISS](https://img.shields.io/badge/FAISS-005571)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
 
 A schema-aware **Retrieval-Augmented Generation (RAG)** SQL assistant that converts natural-language questions into executable SQL queries and executes them directly against a SQLite database.
 

@@ -83,7 +83,7 @@ The assistant is scoped to the Chinook dataset by default and is automatically d
 ### Swap datasets
 You can use other SQLite datasets by replacing the KaggleHub dataset identifier (formatted as `owner/dataset-name`) in the data-loading code.
 
-This line is located in [`load_data.py`](./load_data.py)::
+This line is located in [`load_data.py`](./load_data.py):
 ```python
 import kagglehub
 path = kagglehub.dataset_download("ranasabrii/chinook")  

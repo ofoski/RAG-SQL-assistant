@@ -7,7 +7,7 @@
 - **Problem:** Translating natural-language questions into correct SQL queries  
 - **Solution:** Schema-aware Retrieval-Augmented Generation (RAG) pipeline using SentenceTransformers embeddings and FAISS similarity search over SQLite database schemas  
 - **Outcome:** 100% execution accuracy on a curated evaluation set of reference SQL queries  
-- **Stack:**  
+**Stack:**  
   ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
   ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
   ![FAISS](https://img.shields.io/badge/FAISS-005571)

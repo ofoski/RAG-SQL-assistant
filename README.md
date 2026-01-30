@@ -5,9 +5,9 @@
 
 ### 🔍 At a glance
 - **Problem:** Translating natural-language questions into correct SQL queries  
-- **Solution:** Schema-aware Retrieval-Augmented Generation (RAG) pipeline over database metadata 
+- **Solution:** Schema-aware Retrieval-Augmented Generation (RAG) pipeline using SentenceTransformers embeddings and FAISS similarity search over SQLite database schemas  
 - **Outcome:** 100% execution accuracy on a curated evaluation set of reference SQL queries  
-- **Stack:**
+- **Stack:**  
   ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
   ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
   ![FAISS](https://img.shields.io/badge/FAISS-005571)
@@ -15,27 +15,26 @@
   ![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white)
   ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
   ![RAG](https://img.shields.io/badge/RAG-0F766E)
-  ![LLM](https://img.shields.io/badge/LLM-111827)
+  ![GenAI](https://img.shields.io/badge/GenAI-7C3AED)
 
+A schema-aware **Retrieval-Augmented Generation (RAG)** SQL assistant that converts natural-language questions into executable SQL queries and executes them directly against a SQLite database.
 
-
-A schema-aware **Retrieval-Augmented Generation (RAG)** SQL assistant that converts natural-language questions into executable SQL queries and runs them against SQLite databases.
 
 ## ✨ Features
-- 🔎 **Natural Language → SQL** conversion  
-- 🧠 **Schema-Aware Retrieval** with FAISS embeddings  
-- 📊 **Interactive UI** powered by Streamlit  
-- 🌍 **Dataset Flexibility** – works with Chinook by default, easily swappable to other KaggleHub datasets  
-- 🧪 **Evaluation Framework** with prompts + gold SQL pairs  
+- 🔎 **Natural Language → SQL** conversion using prompt-based generation  
+- 🧠 **Schema-Aware Retrieval** via FAISS similarity search over SentenceTransformers embeddings  
+- 📊 **Interactive UI** built with Streamlit  
+- 🌍 **Dataset Flexibility** – supports SQLite datasets downloaded via KaggleHub  
+- 🧪 **Evaluation Framework** with prompts and gold SQL pairs  
 
 
 ## 🛠️ Pipeline Overview
-1. 📑 **Extract metadata** → read tables and columns from the SQLite database.  
-2. 🔡 **Vectorize schema** → create SentenceTransformers embeddings of per-table schema text.  
-3. ⚡ **Index with FAISS** → store embeddings in FAISS for fast similarity search.  
-4. 🎯 **RAG retrieval** → fetch the top-K relevant tables for each question.  
-5. 🤖 **Generate SQL** → build a focused prompt and produce SQL with OpenAI.  
-6. 📊 **Preview results** → execute SQL against SQLite and display in Streamlit.  
+1. 📑 **Extract schema metadata** – read table names, columns, and relationships from the SQLite database  
+2. 🔡 **Embed schemas** – generate SentenceTransformers embeddings for per-table schema text  
+3. ⚡ **Index embeddings** – store schema embeddings in a FAISS index for similarity search  
+4. 🎯 **Retrieve relevant tables** – select top-K schemas most relevant to each user question  
+5. 🤖 **Generate SQL** – construct a constrained prompt and generate SQL using an OpenAI language model  
+6. 📊 **Execute and display results** – run SQL against SQLite and render outputs in Streamlit 
 
 
 ## Installation (Windows)

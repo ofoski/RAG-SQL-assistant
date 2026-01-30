@@ -81,7 +81,9 @@ streamlit run streamlit.py
 The assistant is scoped to the Chinook dataset by default and is automatically downloaded via KaggleHub (no DB file committed).  
 
 ### Swap datasets
-You can use other SQLite datasets by replacing the KaggleHub dataset identifier (`owner/dataset-name`) in the following line:
+You can use other SQLite datasets by replacing the KaggleHub dataset identifier (formatted as `owner/dataset-name`) in the data-loading code.
+
+This line is located in [`load_data.py`](./load_data.py)::
 ```python
 import kagglehub
 path = kagglehub.dataset_download("ranasabrii/chinook")  

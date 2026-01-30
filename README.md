@@ -21,7 +21,7 @@ A schema-aware **Retrieval-Augmented Generation (RAG)** SQL assistant that conve
 
 
 ## ✨ Features
-- 🔎 **Natural Language → SQL** conversion using prompt-based generation  
+- 🔎 **Natural Language → SQL** conversion  
 - 🧠 **Schema-Aware Retrieval** via FAISS similarity search over SentenceTransformers embeddings  
 - 📊 **Interactive UI** built with Streamlit  
 - 🌍 **Dataset Flexibility** – supports SQLite datasets downloaded via KaggleHub  

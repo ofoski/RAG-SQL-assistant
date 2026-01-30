@@ -111,8 +111,7 @@ https://github.com/user-attachments/assets/a270f159-479f-4efe-a708-0e4fa615780d
 
 ## 📏 Evaluation
 
-- **ROUGE** → used to evaluate SQL similarity  
-- **Execution Accuracy** → compared against reference outputs  
+- **Metrics:** Execution Accuracy, ROUGE (SQL similarity)
 - **Evaluation dataset** → [`sql_eval_dataset.json`](./sql_eval_dataset.json)  
 
 **Difficulty levels:**  

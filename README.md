@@ -28,13 +28,6 @@ A schema-aware **Retrieval-Augmented Generation (RAG)** SQL assistant that conve
 - 🌍 **Dataset Flexibility** – works with Chinook by default, easily swappable to other KaggleHub datasets  
 - 🧪 **Evaluation Framework** with prompts + gold SQL pairs  
 
-## ⚙️ Stack
-- **Streamlit** – UI  
-- **SentenceTransformers** – embeddings  
-- **FAISS** – vector search  
-- **OpenAI** – SQL generation  
-- **SQLite + pandas** – execution  
-
 
 ## 🛠️ Pipeline Overview
 1. 📑 **Extract metadata** → read tables and columns from the SQLite database.  
@@ -132,6 +125,3 @@ https://github.com/user-attachments/assets/a270f159-479f-4efe-a708-0e4fa615780d
 ✅ The assistant successfully generated correct SQL queries for **all examples** in the evaluation dataset,  
 returning the same results as the gold SQL.
  
-
-
-
